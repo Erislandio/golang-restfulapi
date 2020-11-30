@@ -1,10 +1,13 @@
 version: "3"
 
 services:
-  redis:
-    image: redis
+  db:
+    image: postgres
     restart: always
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: Eris2020!
+    volumes:
+      - ./scripts/init.sh:/docker-entrypoint-initdb.d/init-user-db.sh
     ports:
-    - "6379:6379"
-    container_name: redis
-    command: redis-server --requirepass Eris2020!
+      - "5432:5432"
